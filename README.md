@@ -1,2 +1,2 @@
-# Go-Pad: A real-time collaborative text editing and collaboration backend
+# Go-Editor: A real-time collaborative text editing and collaboration backend
 
