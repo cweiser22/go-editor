@@ -1,14 +1,16 @@
 package crdt
 
-import "golang.org/x/exp/constraints"
+import (
+	"cmp"
+)
 
 // LamportClock encapsulates the counter logic for a node that creates Lamport IDs
-type LamportClock[T constraints.Ordered] struct {
+type LamportClock[T cmp.Ordered] struct {
 	replicaID T
 	counter   int
 }
 
-func NewLamportClock[T constraints.Ordered](replicaID T) *LamportClock[T] {
+func NewLamportClock[T cmp.Ordered](replicaID T) *LamportClock[T] {
 	return &LamportClock[T]{
 		replicaID: replicaID,
 		counter:   0,
@@ -16,8 +18,8 @@ func NewLamportClock[T constraints.Ordered](replicaID T) *LamportClock[T] {
 }
 
 // Tick creates a new Lamport ID and increments the counter
-func (lc *LamportClock[T]) Tick() *LamportID[T] {
-	newId := &LamportID[T]{
+func (lc *LamportClock[T]) Tick() LamportId[T] {
+	newId := LamportId[T]{
 		count:     lc.counter,
 		replicaId: lc.replicaID,
 	}
